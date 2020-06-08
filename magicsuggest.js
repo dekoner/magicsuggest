@@ -357,7 +357,9 @@
             /**
              * type to validate against
              */
-            vtype: null
+            vtype: null,
+
+            visibleHelper: true
         };
 
         var conf = $.extend({},options);
@@ -917,8 +919,9 @@
                     'class': 'ms-helper ' + cfg.infoMsgCls
                 });
                 self._updateHelper();
-                ms.container.append(ms.helper);
-
+                if (cfg.visibleHelper) {
+                    ms.container.append(ms.helper);
+                }           
 
                 // Render the whole thing
                 $(el).replaceWith(ms.container);
@@ -1187,9 +1190,11 @@
              * @private
              */
             _updateHelper: function(html) {
-                ms.helper.html(html);
-                if(!ms.helper.is(":visible")) {
-                    ms.helper.fadeIn();
+                if (cfg.visibleHelper){
+                    ms.helper.html(html);
+                    if(!ms.helper.is(":visible")) {
+                        ms.helper.fadeIn();
+                    }
                 }
             },
 
